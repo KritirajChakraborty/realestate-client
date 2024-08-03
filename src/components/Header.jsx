@@ -8,7 +8,7 @@ export default function Header() {
           <span className="text-slate-500">RealEstate</span>
           <span className="text-slate-700">PRO</span>
         </h1>
-        <form className="flex items-center">
+        <form className="flex items-center bg-slate-50 p-3 rounded-lg">
           <input
             type="text"
             placeholder="Search..."
