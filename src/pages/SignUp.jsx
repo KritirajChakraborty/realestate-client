@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -32,6 +34,7 @@ export default function SignUp() {
       }
       setLoading(false);
       setError(null);
+      navigate("/signin");
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -49,6 +52,7 @@ export default function SignUp() {
           id="username"
           className="border p-3 rounded-lg"
           onChange={handleChange}
+          required
         />
         <input
           type="email"
@@ -56,6 +60,7 @@ export default function SignUp() {
           id="email"
           className="border p-3 rounded-lg"
           onChange={handleChange}
+          required
         />
         <input
           type="password"
@@ -63,6 +68,7 @@ export default function SignUp() {
           id="password"
           className="border p-3 rounded-lg"
           onChange={handleChange}
+          required
         />
         <button
           disabled={loading}
