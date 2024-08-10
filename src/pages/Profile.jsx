@@ -11,8 +11,12 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
+  userDeleteStart,
+  userDeleteSuccess,
+  userDeleteFailure,
 } from "../redux/user/userSlice.js";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 //FIREBASE STORAGE SETTINGS
 // allow read;
@@ -29,6 +33,7 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [userSuccess, setUserSuccess] = useState(false);
+  const navigate = useNavigate();
   //console.log(filePercentage);
 
   useEffect(() => {
@@ -67,7 +72,7 @@ export default function Profile() {
   const handleChange = async (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  console.log(formData);
+  //console.log(formData);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -90,6 +95,46 @@ export default function Profile() {
       setUserSuccess(true);
     } catch (error) {
       dispatch(updateUserFailure(error.message));
+    }
+  };
+
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(userDeleteStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+
+      const data = await res.json();
+      console.log(data);
+      if (data.status === false) {
+        dispatch(userDeleteFailure(data.message));
+        return;
+      }
+      dispatch(userDeleteSuccess());
+      navigate("/signup");
+    } catch (error) {
+      console.log("Could not delete user:", error.message);
+    }
+  };
+  //console.log(loading);
+  //console.log(error);
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(userDeleteStart());
+      const res = await fetch("/api/auth/signout", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(userDeleteFailure(data.message));
+        return;
+      }
+      dispatch(userDeleteSuccess());
+      navigate("/signin");
+    } catch (error) {
+      dispatch(userDeleteFailure(error.message));
     }
   };
   return (
@@ -151,10 +196,16 @@ export default function Profile() {
         </button>
       </form>
       <div className="flex justify-between mt-5">
-        <span className="text-slate-900 hover:text-red-500 cursor-pointer">
+        <span
+          onClick={handleDeleteUser}
+          className="text-slate-900 hover:text-red-500 cursor-pointer"
+        >
           Delete User
         </span>
-        <span className="text-slate-900 hover:text-red-500 cursor-pointer">
+        <span
+          onClick={handleSignOut}
+          className="text-slate-900 hover:text-red-500 cursor-pointer"
+        >
           Sign Out
         </span>
       </div>
