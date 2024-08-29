@@ -16,7 +16,7 @@ import {
   userDeleteFailure,
 } from "../redux/user/userSlice.js";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //FIREBASE STORAGE SETTINGS
 // allow read;
@@ -194,6 +194,12 @@ export default function Profile() {
         >
           {loading ? "Loading..." : "Update"}
         </button>
+        <Link
+          className="bg-blue-700 text-slate-50 text-center p-3 border-none uppercase rounded-lg hover:bg-blue-900 "
+          to="/createlisting"
+        >
+          Create Listing
+        </Link>
       </form>
       <div className="flex justify-between mt-5">
         <span
