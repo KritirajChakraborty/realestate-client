@@ -154,6 +154,8 @@ export default function Profile() {
       setListingError(true);
     }
   };
+
+  const handleDeleteListing = async () => {};
   return (
     <div className="max-w-lg mx-auto p-3">
       <h1 className="text-3xl text-center font-semibold py-7">Profile</h1>
@@ -242,14 +244,13 @@ export default function Profile() {
       >
         Show Listings
       </button>
-      <div className="flex flex-col gap-4 p-3">
-        <h1 className="text-2xl text-center font-semibold text-slate-900 my-7">
-          Your Listings
-        </h1>
+      {listings && listings.length > 1 && (
+        <div className="flex flex-col gap-4 p-3">
+          <h1 className="text-2xl text-center font-semibold text-slate-900 my-7">
+            Your Listings
+          </h1>
 
-        {listings &&
-          listings.length > 0 &&
-          listings.map((listing) => (
+          {listings.map((listing) => (
             <div
               key={listing._id}
               className="border rounded-lg flex justify-between p-3 gap-4 items-center"
@@ -268,7 +269,10 @@ export default function Profile() {
                 <p>{listing.name}</p>
               </Link>
               <div className="flex flex-col items-center flex-1">
-                <button className="text-red-700 uppercase hover:text-red-200 hover:bg-red-700 rounded-md p-1">
+                <button
+                  onClick={handleDeleteListing}
+                  className="text-red-700 uppercase hover:text-red-200 hover:bg-red-700 rounded-md p-1"
+                >
                   Delete
                 </button>
                 <Link>
@@ -279,7 +283,8 @@ export default function Profile() {
               </div>
             </div>
           ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
