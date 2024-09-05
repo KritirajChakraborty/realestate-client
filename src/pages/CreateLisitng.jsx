@@ -184,7 +184,6 @@ export default function CreateLisitng() {
               placeholder="Description"
               name="description"
               className="border p-3 rounded-lg"
-              maxLength="100"
               minLength="20"
               required
               onChange={handleChange}
@@ -195,7 +194,6 @@ export default function CreateLisitng() {
               placeholder="Address"
               name="address"
               className="border p-3 rounded-lg"
-              maxLength="70"
               minLength="10"
               required
               onChange={handleChange}
@@ -291,7 +289,9 @@ export default function CreateLisitng() {
                 />
                 <div className="flex flex-col items-center">
                   <p>Regular price</p>
-                  <span className="text-xs">(₹ / month)</span>
+                  {formData.type === "rent" && (
+                    <span className="text-xs">(₹ / month)</span>
+                  )}
                 </div>
               </div>
               {formData.offers && (
@@ -308,7 +308,9 @@ export default function CreateLisitng() {
                   />
                   <div className="flex flex-col items-center">
                     <p>Discounted price</p>
-                    <span className="text-xs">(₹ / month)</span>
+                    {formData.type === "rent" && (
+                      <span className="text-xs">(₹ / month)</span>
+                    )}
                   </div>
                 </div>
               )}
