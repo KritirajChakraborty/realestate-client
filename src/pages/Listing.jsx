@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import {
-  FaAddressBook,
   FaBath,
   FaBed,
   FaChair,
-  FaMapMarkedAlt,
   FaMapMarkerAlt,
   FaParking,
   FaShare,
 } from "react-icons/fa";
+import Contact from "../components/Contact";
 export default function Listing() {
   SwiperCore.use([Navigation]);
   const params = useParams();
@@ -21,6 +21,8 @@ export default function Listing() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
+  const [contact, setContact] = useState(true);
+  const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -43,7 +45,6 @@ export default function Listing() {
     };
     fetchListing();
   }, [params.listingId]);
-  //   console.log(listing);
 
   return (
     <main>
@@ -154,6 +155,15 @@ export default function Listing() {
                 {listing.furnished ? "Furnished" : "Unfurnished"}
               </li>
             </ul>
+            {currentUser && listing.userRef !== currentUser._id && contact && (
+              <button
+                onClick={() => setContact(false)}
+                className="w-full bg-slate-700 text-slate-100 rounded-lg border p-3 items-center uppercase hover:bg-slate-600"
+              >
+                Contact landlord
+              </button>
+            )}
+            {contact && <Contact listing={listing} />}
           </div>
         </div>
       )}
