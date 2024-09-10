@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ListingCart from '../components/ListingCart';
 
 export default function Search() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function Search() {
     order: 'desc',
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [showMore, setShowMore] = useState(false);
   const [listings, setListings] = useState([]);
 
   useEffect(() => {
@@ -49,17 +50,21 @@ export default function Search() {
     const fetchListings = async () => {
       try {
         setLoading(true);
+        setShowMore(true);
         const searchQuery = urlParams.toString();
         const res = await fetch(`/api/listing/getall?${searchQuery}`);
         const data = await res.json();
         if (data.success === false) {
           setLoading(false);
-          setError(data.message);
           return;
+        }
+        if (data.length > 8) {
+          setShowMore(true);
+        } else {
+          setShowMore(false);
         }
         setListings(data);
         setLoading(false);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -121,7 +126,19 @@ export default function Search() {
     navigate(`/search?${searchQuery}`);
   };
 
-  console.log(sideBarData.sort, sideBarData.order);
+  const onShowMoreClick = async () => {
+    const noOfListings = listings.length;
+    const startIndex = noOfListings;
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set('startIndex', startIndex);
+    const searchQuery = urlParams.toString();
+    const res = await fetch(`/api/listing/getall?${searchQuery}`);
+    const data = await res.json();
+    if (data.length < 9) {
+      setShowMore(false);
+    }
+    setListings([...listings, ...data]);
+  };
   return (
     <div className="flex flex-col md:flex-row">
       <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen">
@@ -231,11 +248,36 @@ export default function Search() {
           </button>
         </form>
       </div>
-      <div>
-        <div>
-          <h1 className="text-3xl font-semibold border-b-2 p-3 text-slate-700 mt-5">
-            Listing Results:
-          </h1>
+
+      <div className="flex-1">
+        <h1 className="text-3xl font-semibold p-3 text-slate-700 mt-5">
+          Listing Results:
+        </h1>
+        <div className="p-7 flex flex-wrap gap-6 ">
+          {!loading && listings.length === 0 && (
+            <p className="p-3 text-slate-700 font-semibold">
+              No Listing Found!!
+            </p>
+          )}
+          {loading && (
+            <p className="text-center text-xl font-semibold py-3 w-full ">
+              Loading...
+            </p>
+          )}
+
+          {listings &&
+            listings.length > 0 &&
+            listings.map(listing => (
+              <ListingCart key={listing._id} listing={listing} />
+            ))}
+          {showMore && (
+            <button
+              onClick={onShowMoreClick}
+              className="text-red-600 text-center w-full hover:text-red-400"
+            >
+              Show more
+            </button>
+          )}
         </div>
       </div>
     </div>
