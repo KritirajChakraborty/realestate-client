@@ -141,7 +141,7 @@ export default function Search() {
   };
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen">
+      <div className="p-7 border-b-2 sm:border-b-0 md:border-r-2 md:min-h-screen">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div className="flex items-center gap-2">
             <label className="whitespace-nowrap font-semibold">
@@ -243,7 +243,7 @@ export default function Search() {
               <option value="createdAt_asc">Oldest</option>
             </select>
           </div>
-          <button className="border rounded-lg p-3 uppercase text-center bg-slate-700 text-slate-100 hover:bg-slate-600">
+          <button className="border rounded-lg p-3 uppercase text-center bg-slate-700 text-slate-100 hover:bg-slate-800">
             Search
           </button>
         </form>

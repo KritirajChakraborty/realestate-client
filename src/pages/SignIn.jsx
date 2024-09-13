@@ -1,46 +1,46 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import userSlice, {
   signInStart,
   signInSuccess,
   signinFailure,
-} from "../redux/user/userSlice";
-import Oauth from "../components/Oauth";
+} from '../redux/user/userSlice';
+import Oauth from '../components/Oauth';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const { error, loading } = useSelector((state) => state.user);
+  const { error, loading } = useSelector(state => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleChange = async (e) => {
+  const handleChange = async e => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
     // console.log(formData);
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
       dispatch(signInStart());
-      const res = await fetch("/api/auth/signin", {
-        method: "POST",
+      const res = await fetch('/api/auth/signin', {
+        method: 'POST',
         headers: {
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
 
       const data = await res.json();
-      console.log(data);
+
       if (data.success == false) {
         dispatch(signinFailure(data.message));
         return;
       }
       dispatch(signInSuccess(data));
-      navigate("/");
+      navigate('/');
     } catch (error) {
       dispatch(signinFailure(error.message));
     }
@@ -71,7 +71,7 @@ export default function SignIn() {
           disabled={loading}
           className="bg-red-600 hover:bg-red-900 p-3 rounded-lg border-none text-slate-50 uppercase"
         >
-          {loading ? "Loading..." : "Sign In"}
+          {loading ? 'Loading...' : 'Sign In'}
         </button>
         <Oauth />
       </form>

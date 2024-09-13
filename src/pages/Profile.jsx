@@ -1,12 +1,12 @@
-import { useSelector } from "react-redux";
-import { useRef, useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
+import { useRef, useState, useEffect } from 'react';
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
-} from "firebase/storage";
-import { app } from "../firebase.js";
+} from 'firebase/storage';
+import { app } from '../firebase.js';
 import {
   updateUserStart,
   updateUserSuccess,
@@ -14,9 +14,9 @@ import {
   userDeleteStart,
   userDeleteSuccess,
   userDeleteFailure,
-} from "../redux/user/userSlice.js";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+} from '../redux/user/userSlice.js';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 //FIREBASE STORAGE SETTINGS
 // allow read;
@@ -25,7 +25,7 @@ import { Link, useNavigate } from "react-router-dom";
 // request.resource.contentType.matches('image/.*')
 
 export default function Profile() {
-  const { currentUser, loading, error } = useSelector((state) => state.user);
+  const { currentUser, loading, error } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const fileRef = useRef(null);
   const [file, setFile] = useState(undefined);
@@ -44,25 +44,25 @@ export default function Profile() {
     }
   }, [file]);
 
-  const handleFileUpload = async (file) => {
+  const handleFileUpload = async file => {
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
-      "state_changed",
-      (snapshot) => {
+      'state_changed',
+      snapshot => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
         setFilePercentage(Math.round(progress));
       },
-      (error) => {
+      error => {
         setFileUploadError(true);
       },
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
           setFormData({
             ...formData,
             propic: downloadURL,
@@ -71,18 +71,18 @@ export default function Profile() {
       }
     );
   };
-  const handleChange = async (e) => {
+  const handleChange = async e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   //console.log(formData);
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
       const res = await fetch(`api/user/update/${currentUser._id}`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
@@ -104,7 +104,7 @@ export default function Profile() {
     try {
       dispatch(userDeleteStart());
       const res = await fetch(`/api/user/delete/${currentUser._id}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
 
       const data = await res.json();
@@ -114,9 +114,9 @@ export default function Profile() {
         return;
       }
       dispatch(userDeleteSuccess());
-      navigate("/signup");
+      navigate('/signup');
     } catch (error) {
-      console.log("Could not delete user:", error.message);
+      console.log('Could not delete user:', error.message);
     }
   };
   //console.log(loading);
@@ -125,8 +125,8 @@ export default function Profile() {
   const handleSignOut = async () => {
     try {
       dispatch(userDeleteStart());
-      const res = await fetch("/api/auth/signout", {
-        method: "POST",
+      const res = await fetch('/api/auth/signout', {
+        method: 'POST',
       });
       const data = await res.json();
       if (data.success === false) {
@@ -134,7 +134,7 @@ export default function Profile() {
         return;
       }
       dispatch(userDeleteSuccess());
-      navigate("/signin");
+      navigate('/signin');
     } catch (error) {
       dispatch(userDeleteFailure(error.message));
     }
@@ -155,18 +155,18 @@ export default function Profile() {
     }
   };
 
-  const handleDeleteListing = async (listingId) => {
+  const handleDeleteListing = async listingId => {
     try {
       const res = await fetch(`/api/listing/delete/${listingId}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
       const data = await res.json();
       if (data.success === false) {
         console.log(data.message);
         return;
       }
-      setListings((prevListings) => {
-        prevListings.filter((listing) => listing._id != listingId);
+      setListings(prevListings => {
+        prevListings.filter(listing => listing._id != listingId);
       });
     } catch (error) {
       console.log(error);
@@ -177,7 +177,7 @@ export default function Profile() {
       <h1 className="text-3xl text-center font-semibold py-7">Profile</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-7">
         <input
-          onChange={(e) => setFile(e.target.files[0])}
+          onChange={e => setFile(e.target.files[0])}
           type="file"
           accept="image/*"
           hidden
@@ -200,7 +200,7 @@ export default function Profile() {
             File sucessfully uploaded
           </span>
         ) : (
-          ""
+          ''
         )}
         <input
           type="text"
@@ -227,10 +227,10 @@ export default function Profile() {
           disabled={loading}
           className="bg-red-500 text-slate-50 text-center p-3 border-none uppercase rounded-lg hover:bg-red-700 "
         >
-          {loading ? "Loading..." : "Update"}
+          {loading ? 'Loading...' : 'Update'}
         </button>
         <Link
-          className="bg-blue-700 text-slate-50 text-center p-3 border-none uppercase rounded-lg hover:bg-blue-900 "
+          className="bg-slate-700 text-slate-50 text-center p-3 border-none uppercase rounded-lg hover:bg-slate-800 "
           to="/createlisting"
         >
           Create Listing
@@ -266,7 +266,7 @@ export default function Profile() {
             Your Listings
           </h1>
 
-          {listings.map((listing) => (
+          {listings.map(listing => (
             <div
               key={listing._id}
               className="border rounded-lg flex justify-between p-3 gap-4 items-center"
