@@ -52,6 +52,13 @@ export default function Header() {
               About
             </li>
           </Link>
+          {currentUser && (
+            <Link to="/review">
+              <li className="text-slate-600 text-sm sm:text-xl hover:text-red-600">
+                Review
+              </li>
+            </Link>
+          )}
           <Link to="/profile">
             {currentUser ? (
               <img
@@ -60,7 +67,7 @@ export default function Header() {
                 className="h-7 w-7 rounded-full object-cover"
               />
             ) : (
-              <li className=" text-slate-600 text-sm sm:text-xl hover:underline">
+              <li className=" text-slate-600 text-sm sm:text-xl hover:text-red-600">
                 Sign-in
               </li>
             )}

@@ -13,6 +13,7 @@ import Listing from './pages/Listing';
 import Search from './pages/Search';
 import FAQ from './pages/FAQ';
 import TermsAndConditions from './pages/TermsAndConditions';
+import Review from './pages/Review';
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/listing/:listingId" element={<Listing />} />
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/review" element={<Review />} />
           <Route path="/createlisting" element={<CreateLisitng />} />
           <Route path="/updatelisting/:listingId" element={<UpdateListing />} />
         </Route>
