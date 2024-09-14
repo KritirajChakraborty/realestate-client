@@ -14,7 +14,7 @@ import {
   FaShare,
 } from 'react-icons/fa';
 import Contact from '../components/Contact';
-import { current } from '@reduxjs/toolkit';
+
 export default function Listing() {
   SwiperCore.use([Navigation]);
   const params = useParams();

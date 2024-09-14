@@ -13,8 +13,8 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="max-w-screen-full mx-auto bg-slate-200 shadow-md pt-1">
-        <div className="mt-10 mb-10 px-4 md:px-28 flex flex-col md:flex-row items-start justify-between gap-8">
+      <footer className="bg-slate-200 shadow-md ">
+        <div className="mx-auto p-4 flex flex-col md:flex-row items-center justify-between gap-6 max-w-6xl">
           <div className="md:w-[400px]">
             <p className="my-8 text-slate-800">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

@@ -2,6 +2,7 @@ import { FaSearch } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { MdRateReview } from 'react-icons/md';
 export default function Header() {
   const { currentUser } = useSelector(state => state.user);
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,10 +24,12 @@ export default function Header() {
 
   return (
     <header className="bg-slate-200 shadow-md">
-      <div className="flex justify-between items-center max-w-6xl mx-auto p-2 sm:p-4">
+      <div className="flex justify-between items-center max-w-6xl mx-auto p-4">
         <h1 className="font-bold text-sm sm:text-xl flex">
-          <span className="text-slate-500">RealEstate</span>
-          <span className="text-slate-700">PRO</span>
+          <Link to="/">
+            <span className="text-slate-500">RealEstate</span>
+            <span className="text-slate-700">PRO</span>
+          </Link>
         </h1>
         <form
           onSubmit={handleSubmit}
@@ -41,23 +44,33 @@ export default function Header() {
           />
           <FaSearch className="text-slate-600" onClick={handleSubmit} />
         </form>
-        <ul className="flex items-center gap-4">
+
+        <ul className="flex items-center justify-end gap-4">
           <Link to="/">
-            <li className="hidden sm:inline text-slate-600 text-sm sm:text-xl hover:text-red-600">
+            <li className="hidden sm:inline text-slate-600 text-xl hover:text-red-600">
               Home
             </li>
           </Link>
+
           <Link to="/about">
-            <li className="hidden sm:inline text-slate-600 text-sm sm:text-xl hover:text-red-600">
+            <li className="hidden sm:inline text-slate-600 text-xl hover:text-red-600">
               About
             </li>
           </Link>
           {currentUser && (
-            <Link to="/review">
-              <li className="text-slate-600 text-sm sm:text-xl hover:text-red-600">
-                Review
-              </li>
-            </Link>
+            <>
+              {' '}
+              <Link to="/review">
+                <li className="hidden sm:inline text-slate-600 text-xl hover:text-red-600">
+                  Review
+                </li>
+              </Link>
+              <Link to="/review">
+                <li className=" inline sm:hidden text-slate-600 text-xl hover:text-red-600">
+                  <MdRateReview />
+                </li>
+              </Link>
+            </>
           )}
           <Link to="/profile">
             {currentUser ? (
