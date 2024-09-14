@@ -76,7 +76,7 @@ export default function Reviews() {
           >
             {reviews.map(review => (
               <SwiperSlide key={review._id}>
-                <div className="flex flex-col gap-2 bg-slate-200 p-3 rounded-lg w-[220px] h-[180px]">
+                <div className="flex flex-col gap-2 bg-white border-black p-3 rounded-lg w-[220px] h-[180px]">
                   <div className="flex flex-row gap-2 items-center">
                     <img
                       src={review.photoURL}
