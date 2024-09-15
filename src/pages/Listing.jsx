@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css/bundle';
 import {
   FaBath,
@@ -67,7 +67,12 @@ export default function Listing() {
       )}
       {listing && !loading && !error && (
         <div>
-          <Swiper navigation>
+          <Swiper
+            autoplay={{ delay: 3000, disableOnInteraction: true }}
+            loop={true}
+            navigation={true}
+            modules={[Navigation, Autoplay]}
+          >
             {listing.imageURLs.map(url => (
               <SwiperSlide key={url}>
                 <div
@@ -165,7 +170,7 @@ export default function Listing() {
                 Contact landlord
               </button>
             )}
-            {currentUser && listing.userRef !== currentUser._id && contact && (
+            {currentUser && listing.userRef !== currentUser._id && !contact && (
               <Contact listing={listing} />
             )}
           </div>
