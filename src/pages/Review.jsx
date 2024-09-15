@@ -17,6 +17,7 @@ export default function Review() {
       setError(false);
       const res = await fetch(`${URL}/api/review/create`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-type': 'application/json',
         },
