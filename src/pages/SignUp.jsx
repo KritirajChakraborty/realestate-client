@@ -1,33 +1,31 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import Oauth from "../components/Oauth";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Oauth from '../components/Oauth';
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const handleChange = (e) => {
+  const handleChange = e => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
-    // console.log(formData);
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await fetch("/api/auth/signup", {
-        method: "POST",
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
         headers: {
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
 
       const data = await res.json();
-      console.log(data);
       if (data.success == false) {
         setError(data.message);
         setLoading(false);
@@ -35,7 +33,7 @@ export default function SignUp() {
       }
       setLoading(false);
       setError(null);
-      navigate("/signin");
+      navigate('/signin');
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -75,7 +73,7 @@ export default function SignUp() {
           disabled={loading}
           className="bg-red-500 text-slate-50 text-center hover:bg-red-700 p-3 rounded-lg border-none uppercase "
         >
-          {loading ? "Loading..." : "Sign Up"}
+          {loading ? 'Loading...' : 'Sign Up'}
         </button>
         <Oauth />
       </form>

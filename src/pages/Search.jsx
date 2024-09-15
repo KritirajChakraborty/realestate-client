@@ -65,9 +65,7 @@ export default function Search() {
         }
         setListings(data);
         setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     };
 
     fetchListings();

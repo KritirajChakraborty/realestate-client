@@ -69,17 +69,17 @@ export default function BestProperties() {
               },
               1024: {
                 slidesPerView: 3,
-                spaceBetween: 40,
+                spaceBetween: 50,
               },
             }}
             loop={true}
             navigation={true}
             modules={[Autoplay, Navigation]}
-            className="pl-5"
+            className="md:pl-9 lg:pl-0 xl:pl-7"
           >
             {listings.map(listing => (
               <SwiperSlide key={listing._id} className="!mb-5">
-                <div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[320px]">
+                <div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[300px]">
                   <Link to={`/listing/${listing._id}`}>
                     <img
                       src={

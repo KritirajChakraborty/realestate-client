@@ -36,7 +36,6 @@ export default function Profile() {
   const [listings, setListings] = useState([]);
   const [listingError, setListingError] = useState(false);
   const navigate = useNavigate();
-  //console.log(filePercentage);
 
   useEffect(() => {
     if (file) {
@@ -74,7 +73,7 @@ export default function Profile() {
   const handleChange = async e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  //console.log(formData);
+
   const handleSubmit = async e => {
     e.preventDefault();
     try {
@@ -87,7 +86,7 @@ export default function Profile() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
+
       if (data.success === false) {
         dispatch(updateUserFailure(data.message));
         return;
@@ -108,7 +107,7 @@ export default function Profile() {
       });
 
       const data = await res.json();
-      console.log(data);
+
       if (data.status === false) {
         dispatch(userDeleteFailure(data.message));
         return;
@@ -116,11 +115,9 @@ export default function Profile() {
       dispatch(userDeleteSuccess());
       navigate('/signup');
     } catch (error) {
-      console.log('Could not delete user:', error.message);
+      // console.log('Could not delete user:', error.message);
     }
   };
-  //console.log(loading);
-  //console.log(error);
 
   const handleSignOut = async () => {
     try {
@@ -162,15 +159,12 @@ export default function Profile() {
       });
       const data = await res.json();
       if (data.success === false) {
-        console.log(data.message);
         return;
       }
       setListings(prevListings => {
         prevListings.filter(listing => listing._id != listingId);
       });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   return (
     <div className="max-w-lg mx-auto p-3">

@@ -66,17 +66,17 @@ export default function Reviews() {
               },
               1024: {
                 slidesPerView: 4,
-                spaceBetween: 30,
+                spaceBetween: 20,
               },
             }}
             loop={true}
             navigation={true}
             modules={[Autoplay, Navigation]}
-            className="pl-8"
+            className="pl-20 md:pl-0 xl:pl-5"
           >
             {reviews.map(review => (
               <SwiperSlide key={review._id}>
-                <div className="flex flex-col gap-2 bg-white border-black p-3 rounded-lg w-[220px] h-[180px]">
+                <div className="flex flex-col gap-2 bg-white border-black p-3 rounded-lg w-full max-w-[240px] h-[200px]">
                   <div className="flex flex-row gap-2 items-center">
                     <img
                       src={review.photoURL}
@@ -86,7 +86,7 @@ export default function Reviews() {
                     <p className="text-slate-700 font-bold">{review.name}</p>
                   </div>
 
-                  <div className="text-left text-slate-600 break-words">
+                  <div className="text-left text-slate-600 break-words p-1">
                     <p>{review.review}</p>
                   </div>
                 </div>

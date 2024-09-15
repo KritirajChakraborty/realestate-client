@@ -36,7 +36,6 @@ export default function Review() {
 
       navigate('/');
     } catch (error) {
-      console.log(error);
       setError(error.message);
       setLoading(true);
     }
@@ -63,7 +62,7 @@ export default function Review() {
               value={review}
               onChange={e => setReview(e.target.value)}
               rows="10"
-              maxLength="100"
+              maxLength="90"
               required
               className="w-full border-none rounded-lg p-3  mb-8"
             />

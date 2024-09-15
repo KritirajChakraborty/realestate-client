@@ -13,7 +13,7 @@ export default function WhyUs() {
         ideal home quickly. Discover luxury, comfort, and convenience, all in
         one place.
       </p>
-      <div className="flex flex-col sm:flex-row gap-6 sm:gap-4 justify-between">
+      <div className="flex flex-col lg:flex-row gap-6 sm:gap-4 justify-between">
         <div className="flex flex-col gap-4 items-center justify-between bg-slate-200 border-none p-3 rounded-lg shadow-md hover:bg-white hover:border-slate-500 object-cover hover:scale-105 transition-scale duration-300">
           <FaLocationDot className="text-6xl text-blue-800 bg-slate-100 rounded-full p-3" />
           <h3 className="text-xl text-slate-800 font-semibold">

@@ -5,7 +5,7 @@ export default function Newsletter() {
   const [success, setSuccess] = useState(false);
   const handleSubmit = async event => {
     event.preventDefault();
-    console.log(event.target.name);
+
     try {
       const res = await fetch('/api/newsletter/post', {
         method: 'POST',
@@ -22,7 +22,6 @@ export default function Newsletter() {
       setSuccess(true);
     } catch (error) {
       setSuccess(false);
-      console.log(error);
     }
   };
   const handleChange = e => {
@@ -37,7 +36,7 @@ export default function Newsletter() {
           </h2>
           <form
             onSubmit={handleSubmit}
-            className="flex gap-4 mx-auto text-center"
+            className="flex gap-4 mx-auto text-center items-baseline"
           >
             <input
               type="email"

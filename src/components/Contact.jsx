@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Contact({ listing }) {
   const [landlord, setLandlord] = useState(null);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const fetchLandLord = async () => {
       const res = await fetch(`/api/user/${listing.userRef}`);
       const data = await res.json();
       if (data.success === false) {
-        console.log(data.message);
         return;
       }
       setLandlord(data);
@@ -18,20 +17,19 @@ export default function Contact({ listing }) {
     fetchLandLord();
   }, [listing]);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setMessage(e.target.value);
   };
-  console.log(message);
 
   return (
     <>
       {landlord && (
         <div className="flex flex-col gap-3">
           <p>
-            Contact{" "}
+            Contact{' '}
             <span className="font-semibold text-red-700 uppercase">
               {landlord.username}
-            </span>{" "}
+            </span>{' '}
             for <span className="font-semibold">{listing.name}</span>
           </p>
           <textarea

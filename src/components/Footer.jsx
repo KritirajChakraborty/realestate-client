@@ -14,14 +14,14 @@ export default function Footer() {
   return (
     <>
       <footer className="bg-slate-200 shadow-md ">
-        <div className="mx-auto p-4 flex flex-col md:flex-row text-center items-center justify-between gap-6 max-w-6xl">
-          <div className="md:w-[400px] text-center">
-            <p className="my-8 text-slate-800">
+        <div className="mx-auto p-4 flex flex-col md:flex-row text-center items-center align-top justify-between gap-6 max-w-6xl">
+          <div className="md:w-[400px] text-center flex-1">
+            <p className="my-1 text-slate-800">
               At RealEstatePRO, we are dedicated to delivering seamless real
               estate solutions with a focus on quality, trust, innovation, and
               unparalleled customer satisfaction.
             </p>
-            <div className="flex justify-center gap-6">
+            <div className="flex justify-center  gap-6">
               <FaFacebookF className="w-5 h-5 cursor-pointer hover:text-red-600" />
               <FaTwitter className="w-5 h-5 cursor-pointer hover:text-red-600" />
               <FaLinkedinIn className="w-5 h-5 cursor-pointer hover:text-red-600" />
@@ -29,7 +29,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="text-slate-700">
+          <div className="text-slate-700 flex-1">
             <h4 className="font-semibold mb-3 uppercase">Contact info</h4>
             <div className="flex flex-col justify-between items-center space-y-2">
               <button
@@ -50,7 +50,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="text-slate-700">
+          <div className="text-slate-700 flex-1">
             <h4 className="font-semibold mb-3">ABOUT US</h4>
             <div className="space-y-2">
               <Link to="/search" className="text-sm block hover:text-red-600">

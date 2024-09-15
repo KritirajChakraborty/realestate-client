@@ -61,7 +61,7 @@ export default function Hero() {
                 className="flex items-center gap-1 font-semibold hover:text-red-600 text-xs lg:text-lg"
               >
                 Discover the perfect property{' '}
-                <FaArrowUpRightFromSquare className="text-sm hover:text-red-600 font-semibold" />
+                <FaArrowUpRightFromSquare className="text-md hover:text-red-600 font-semibold" />
               </Link>
             </div>
             <img

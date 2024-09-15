@@ -42,7 +42,6 @@ export default function Listing() {
       } catch (error) {
         setLoading(false);
         setError(error);
-        console.log(error);
       }
     };
     fetchListing();
