@@ -14,7 +14,7 @@ export default function BestProperties() {
       try {
         setLoading(true);
         setError(false);
-        const res = await fetch('/api/listing/getall?limit=8');
+        const res = await fetch('api/listing/getall?limit=8');
         const data = await res.json();
 
         if (data.success === false) {
