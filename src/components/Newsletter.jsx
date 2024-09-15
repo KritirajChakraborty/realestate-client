@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { URL } from '../redux/store';
 
 export default function Newsletter() {
   const [email, setEmail] = useState('');
@@ -7,7 +8,7 @@ export default function Newsletter() {
     event.preventDefault();
 
     try {
-      const res = await fetch('/api/newsletter/post', {
+      const res = await fetch(`${URL}/api/newsletter/post`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',

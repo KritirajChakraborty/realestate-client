@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Oauth from '../components/Oauth';
+import { URL } from '../redux/store';
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
@@ -17,7 +18,7 @@ export default function SignUp() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await fetch('/api/auth/signup', {
+      const res = await fetch(`${URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',

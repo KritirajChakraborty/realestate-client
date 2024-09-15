@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { URL } from '../redux/store';
 
 export default function Contact({ listing }) {
   const [landlord, setLandlord] = useState(null);
@@ -7,7 +8,7 @@ export default function Contact({ listing }) {
 
   useEffect(() => {
     const fetchLandLord = async () => {
-      const res = await fetch(`/api/user/${listing.userRef}`);
+      const res = await fetch(`${URL}/api/user/${listing.userRef}`);
       const data = await res.json();
       if (data.success === false) {
         return;

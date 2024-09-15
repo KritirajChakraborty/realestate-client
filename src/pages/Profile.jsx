@@ -17,6 +17,7 @@ import {
 } from '../redux/user/userSlice.js';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { URL } from '../redux/store.js';
 
 //FIREBASE STORAGE SETTINGS
 // allow read;
@@ -78,7 +79,7 @@ export default function Profile() {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
-      const res = await fetch(`api/user/update/${currentUser._id}`, {
+      const res = await fetch(`${URL}/api/user/update/${currentUser._id}`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -102,7 +103,7 @@ export default function Profile() {
   const handleDeleteUser = async () => {
     try {
       dispatch(userDeleteStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`${URL}/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
       });
 
@@ -122,7 +123,7 @@ export default function Profile() {
   const handleSignOut = async () => {
     try {
       dispatch(userDeleteStart());
-      const res = await fetch('/api/auth/signout', {
+      const res = await fetch(`${URL}/api/auth/signout`, {
         method: 'POST',
       });
       const data = await res.json();
@@ -140,7 +141,7 @@ export default function Profile() {
   const handleListing = async () => {
     try {
       setListingError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const res = await fetch(`${URL}/api/user/listings/${currentUser._id}`);
       const data = await res.json();
       if (data.success === false) {
         setListingError(true);
@@ -154,7 +155,7 @@ export default function Profile() {
 
   const handleDeleteListing = async listingId => {
     try {
-      const res = await fetch(`/api/listing/delete/${listingId}`, {
+      const res = await fetch(`${URL}/api/listing/delete/${listingId}`, {
         method: 'DELETE',
       });
       const data = await res.json();

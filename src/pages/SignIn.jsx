@@ -7,6 +7,7 @@ import userSlice, {
   signinFailure,
 } from '../redux/user/userSlice';
 import Oauth from '../components/Oauth';
+import { URL } from '../redux/store';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -24,7 +25,7 @@ export default function SignIn() {
     e.preventDefault();
     try {
       dispatch(signInStart());
-      const res = await fetch('/api/auth/signin', {
+      const res = await fetch(`${URL}/api/auth/signin`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ListingCart from '../components/ListingCart';
+import { URL } from '../redux/store';
 
 export default function Search() {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ export default function Search() {
         setLoading(true);
         setShowMore(true);
         const searchQuery = urlParams.toString();
-        const res = await fetch(`/api/listing/getall?${searchQuery}`);
+        const res = await fetch(`${URL}/api/listing/getall?${searchQuery}`);
         const data = await res.json();
         if (data.success === false) {
           setLoading(false);
@@ -130,7 +131,7 @@ export default function Search() {
     const urlParams = new URLSearchParams(location.search);
     urlParams.set('startIndex', startIndex);
     const searchQuery = urlParams.toString();
-    const res = await fetch(`/api/listing/getall?${searchQuery}`);
+    const res = await fetch(`${URL}/api/listing/getall?${searchQuery}`);
     const data = await res.json();
     if (data.length < 9) {
       setShowMore(false);
