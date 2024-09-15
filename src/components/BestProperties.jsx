@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css/bundle';
 import { Link } from 'react-router-dom';
+import { URL } from '../redux/store';
 
 export default function BestProperties() {
   const [listings, setListings] = useState([]);
@@ -14,7 +15,7 @@ export default function BestProperties() {
       try {
         setLoading(true);
         setError(false);
-        const res = await fetch('api/listing/getall?limit=8');
+        const res = await fetch(`${URL}api/listing/getall?limit=8`);
         const data = await res.json();
 
         if (data.success === false) {

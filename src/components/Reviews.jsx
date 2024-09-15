@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css/bundle';
+import { URL } from '../redux/store';
 
 export default function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -13,7 +14,7 @@ export default function Reviews() {
       try {
         setLoading(true);
         setError(false);
-        const res = await fetch('/api/review/get');
+        const res = await fetch(`${URL}/api/review/get`);
         const data = await res.json();
         if (data.success === false) {
           setError(data.message);

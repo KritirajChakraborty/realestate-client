@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { URL } from '../redux/store';
 
 export default function Review() {
   const [review, setReview] = useState('');
@@ -14,7 +15,7 @@ export default function Review() {
     try {
       setLoading(true);
       setError(false);
-      const res = await fetch('/api/review/create', {
+      const res = await fetch(`${URL}/api/review/create`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
