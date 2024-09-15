@@ -37,6 +37,7 @@ export default function Newsletter() {
           </h2>
           <form
             onSubmit={handleSubmit}
+            name="newsletter"
             className="flex gap-4 mx-auto text-center items-baseline"
           >
             <input
