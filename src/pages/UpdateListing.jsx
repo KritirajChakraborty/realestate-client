@@ -20,7 +20,7 @@ export default function UpdateListing() {
     bedrooms: 1,
     bathrooms: 1,
     regularPrice: 50,
-    discountPrice: 0,
+    discountPrice: 50,
     type: 'rent',
     furnished: false,
     parking: false,

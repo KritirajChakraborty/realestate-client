@@ -127,6 +127,7 @@ export default function Profile() {
       dispatch(userDeleteStart());
       const res = await fetch(`${URL}/api/auth/signout`, {
         method: 'POST',
+        credentials: 'include',
       });
       const data = await res.json();
       if (data.success === false) {
@@ -260,7 +261,7 @@ export default function Profile() {
       >
         Show Listings
       </button>
-      {listings && listings.length > 1 && (
+      {listings && listings.length >= 1 && (
         <div className="flex flex-col gap-4 p-3">
           <h1 className="text-2xl text-center font-semibold text-slate-900 my-7">
             Your Listings

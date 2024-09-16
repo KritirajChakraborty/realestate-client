@@ -8,7 +8,9 @@ export default function Contact({ listing }) {
 
   useEffect(() => {
     const fetchLandLord = async () => {
-      const res = await fetch(`${URL}/api/user/${listing.userRef}`);
+      const res = await fetch(`${URL}/api/user/${listing.userRef}`, {
+        credentials: 'include',
+      });
       const data = await res.json();
       if (data.success === false) {
         return;
