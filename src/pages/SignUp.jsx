@@ -20,6 +20,7 @@ export default function SignUp() {
       setLoading(true);
       const res = await fetch(`${URL}/api/auth/signup`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-type': 'application/json',
         },

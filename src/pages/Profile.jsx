@@ -81,6 +81,7 @@ export default function Profile() {
       dispatch(updateUserStart());
       const res = await fetch(`${URL}/api/user/update/${currentUser._id}`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-type': 'application/json',
         },
@@ -105,6 +106,7 @@ export default function Profile() {
       dispatch(userDeleteStart());
       const res = await fetch(`${URL}/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
+        credentials: 'include',
       });
 
       const data = await res.json();
@@ -141,7 +143,9 @@ export default function Profile() {
   const handleListing = async () => {
     try {
       setListingError(false);
-      const res = await fetch(`${URL}/api/user/listings/${currentUser._id}`);
+      const res = await fetch(`${URL}/api/user/listings/${currentUser._id}`, {
+        credentials: 'include',
+      });
       const data = await res.json();
       if (data.success === false) {
         setListingError(true);
@@ -157,6 +161,7 @@ export default function Profile() {
     try {
       const res = await fetch(`${URL}/api/listing/delete/${listingId}`, {
         method: 'DELETE',
+        credentials: 'include',
       });
       const data = await res.json();
       if (data.success === false) {
